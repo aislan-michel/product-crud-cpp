@@ -1,2 +1,3 @@
+*.exe
+!main.exe
 0
-main.exe
