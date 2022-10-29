@@ -14,7 +14,6 @@ int main()
 
     Product products[] = {};
 
-
     cout << welcome + " How many product you do create? ";
     cin >> productsToCreate;
 
