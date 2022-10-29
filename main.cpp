@@ -5,10 +5,32 @@
 using namespace std;
 
 // Main() function: where the execution of program begins
+
+//cout << "print"
+
+class Product{
+public:
+    string Name;
+    double Price;
+};
+
 int main()
 {
-	// prints hello world
-	cout << "Hello World";
+    const string welcome = "Welcome!";
 
-	return 0;
+    Product products[] = {};
+
+    Product newProduct;
+
+    cout << "Product name: ";
+    cin >> newProduct.Name;
+    cout << "Product price: ";
+	cin >> newProduct.Price;
+
+    cout << "\nproduct: " << newProduct.Name;
+    cout << "\nprice: " << newProduct.Price;
+
+    
+
+	system("pause>0");
 }
