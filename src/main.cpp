@@ -12,24 +12,26 @@ int main()
     int productsToCreate = 0;
     const string welcome = "Welcome!";
 
-    Product products[] = {};
+    Product products[10] = {};
 
     cout << welcome + " How many product you do create? ";
     cin >> productsToCreate;
 
     for (int i = 0; i < productsToCreate; i++)
     {
-        cout << "Product name: ";
+        cout << "\nProduct name: ";
         cin >> products[i].Name;
         cout << "Product price: ";
         cin >> products[i].Price;
     }
 
+    cout << "\nProducts:\n";
     for (int i = 0; i < productsToCreate; i++)
     {
-        cout << "\nproduct: " << products[i].Name;
-        cout << "\nprice: " << products[i].Price;
+        cout << "product: " << products[i].Name + " - price: " << products[i].Price << "$\n";
     }
+
+    cout << "\n";
 
 	system("pause>0");
 }
