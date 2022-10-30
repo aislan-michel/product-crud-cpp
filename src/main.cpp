@@ -1,37 +1,82 @@
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
-class Product{
+class Product
+{
 public:
     string Name;
     double Price;
+
+    Product(string name, double price)
+    {
+        Name = name;
+        Price = price;
+    }
 };
 
 int main()
 {
+    vector<Product> products;
+
     int productsToCreate = 0;
-    const string welcome = "Welcome!";
+    int option = 0;
 
-    Product products[10] = {};
+    cout << "\nWelcome! What do you want to do?";
+    string options("");
+    options.append("\n1 - Create");
+    options.append("\n2 - Read");
+    options.append("\n3 - Update");
+    options.append("\n4 - Delete");
+    options.append("\n0 - Quit\n");
+    options.append("\nType number of option: ");
+    cout << options;
+    cin >> option;
 
-    cout << welcome + " How many product you do create? ";
-    cin >> productsToCreate;
-
-    for (int i = 0; i < productsToCreate; i++)
+    while (option > 0)
     {
-        cout << "\nProduct name: ";
-        cin >> products[i].Name;
-        cout << "Product price: ";
-        cin >> products[i].Price;
+        switch (option)
+        {
+            case 1:
+            {
+                string name = "";
+                double price = 0.0;
+                cout << "\nProduct name: ";
+                cin >> name;
+                cout << "Product price: ";
+                cin >> price;
+
+                products.push_back(Product(name, price));
+
+                break;
+            }
+            case 2:
+                if (products.size() == 0)
+                {
+                    cout << "\nno data\n";
+                    break;
+                }
+
+                cout << "\nProducts:\n";
+                for (int i = 0; i < products.size(); i++)
+                {
+                    cout << "product: " << products[i].Name + " - price: " << products[i].Price << "$\n";
+                }
+
+                break;
+
+            default:
+                cout << "\ninvalid option\n";
+                cout << options;
+                cin >> option;
+        }
+
+        cout << options;
+        cin >> option;
     }
 
-    cout << "\nProducts:\n";
-    for (int i = 0; i < productsToCreate; i++)
-    {
-        cout << "product: " << products[i].Name + " - price: " << products[i].Price << "$\n";
-    }
+    cout << "\nsee you later!";
 
-    cout << "\n";
-
-	system("pause>0");
+    system("pause>0");
 }
