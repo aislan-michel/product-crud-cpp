@@ -61,7 +61,7 @@ int main()
                 cout << "\nProducts:\n";
                 for (int i = 0; i < products.size(); i++)
                 {
-                    cout << "product: " << products[i].Name + " - price: " << products[i].Price << "$\n";
+                    cout << products[i].Name + ", " << products[i].Price << "$\n";
                 }
 
                 break;
