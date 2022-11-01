@@ -5,10 +5,23 @@
 
 using namespace std;
 
+list<Product> products;
+
+Product GetById(int id)
+{
+    for(Product product : products)
+    {
+        if (product.Id == id)
+        {
+            return product;
+        }
+    }
+
+    return Product();
+}
+
 int main()
 {
-    list<Product> products;
-
     int option = 0;
 
     cout << "\nWelcome! What do you want to do?" << endl;
@@ -67,16 +80,7 @@ int main()
                 cout << "Product Id: ";
                 cin >> id;
 
-                Product productToUpdate;
-
-                for(Product product : products)
-                {
-                    if (product.Id == id)
-                    {
-                        productToUpdate = product;
-                        break;
-                    }
-                }
+                Product productToUpdate = GetById(id);
 
                 if (productToUpdate.Id != id)
                 {
@@ -115,16 +119,7 @@ int main()
                 cout << "Product Id: ";
                 cin >> id;
 
-                Product productToDelete;
-
-                for(Product product : products)
-                {
-                    if (product.Id == id)
-                    {
-                        productToDelete = product;
-                        break;
-                    }
-                }
+                Product productToDelete = GetById(id);
 
                 if (productToDelete.Id != id)
                 {
@@ -169,3 +164,4 @@ int main()
 
     system("pause>0");
 }
+
