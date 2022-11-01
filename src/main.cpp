@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <list>  
 
 using namespace std;
 
-static int _id = 0;
+static int _id = 1;
 
 class Product
 {
@@ -11,6 +12,9 @@ public:
     int Id;
     string Name;
     double Price;
+
+    bool operator == (const Product& s) const { return Name == s.Name && Id == s.Id; }
+    bool operator != (const Product& s) const { return !operator==(s); }
 
     Product( )
     {
@@ -33,9 +37,8 @@ public:
 
 int main()
 {
-    vector<Product> products;
+    list<Product> products;
 
-    int productsToCreate = 0;
     int option = 0;
 
     cout << "\nWelcome! What do you want to do?" << endl;
@@ -86,7 +89,7 @@ int main()
 
                 break;
             }
-
+            
             case 3:
             {
                 int id = 0;
@@ -95,14 +98,12 @@ int main()
                 cin >> id;
 
                 Product productToUpdate;
-                int productToUpdateIndex;
 
-                for (int i = 0; i < products.size(); i++)
+                for(Product product : products)
                 {
-                    if (products[i].Id == id)
+                    if (product.Id == id)
                     {
-                        productToUpdate = products[i];
-                        productToUpdateIndex = i;
+                        productToUpdate = product;
                         break;
                     }
                 }
@@ -125,9 +126,61 @@ int main()
 
                 productToUpdate.Update(name, price);
 
-                products[productToUpdateIndex] = productToUpdate;
+                for (auto product = products.rbegin( ); product != products.rend( ); product++)
+                {
+                    if (product->Id == productToUpdate.Id)
+                    {
+                        product->Name = productToUpdate.Name;
+                        product->Price = productToUpdate.Price;
+                    }
+                }
 
                 cout << "updated!" << endl;
+
+                break;
+            }
+            
+            case 4:
+            {
+                int id = 0;
+
+                cout << "Product Id: ";
+                cin >> id;
+
+                Product productToDelete;
+
+                for(Product product : products)
+                {
+                    if (product.Id == id)
+                    {
+                        productToDelete = product;
+                        break;
+                    }
+                }
+
+                if (productToDelete.Id != id)
+                {
+                    cout << "not found" << endl;
+                    break;
+                }
+
+                cout << "\nid: " + to_string(productToDelete.Id) + " | name: " + productToDelete.Name + " | price: " + to_string(productToDelete.Price) + "\n" << endl;
+
+                string response;
+
+                cout << "\nArea you sure (y/n)? ";
+                cin >> response;
+
+                if (response == "y")
+                {
+                    products.remove(productToDelete);
+
+                    cout << "deleted!" << endl;
+
+                    break;
+                }
+
+                cout << "not deleted!" << endl;
 
                 break;
             }
