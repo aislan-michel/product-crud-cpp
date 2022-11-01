@@ -1,39 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <list>  
+#include "Entities/Product.h"
 
 using namespace std;
-
-static int _id = 1;
-
-class Product
-{
-public:
-    int Id;
-    string Name;
-    double Price;
-
-    bool operator == (const Product& s) const { return Name == s.Name && Id == s.Id; }
-    bool operator != (const Product& s) const { return !operator==(s); }
-
-    Product( )
-    {
-
-    }
-
-    Product(string name, double price)
-    {
-        Id = _id++;
-        Name = name;
-        Price = price;
-    }
-
-    void Update(string name, double price) 
-    {
-        Name = name;
-        Price = price;
-    }
-};
 
 int main()
 {
@@ -124,14 +94,12 @@ int main()
                 cout << "New product price: ";
                 cin >> price;
 
-                productToUpdate.Update(name, price);
-
                 for (auto product = products.rbegin( ); product != products.rend( ); product++)
                 {
                     if (product->Id == productToUpdate.Id)
                     {
-                        product->Name = productToUpdate.Name;
-                        product->Price = productToUpdate.Price;
+                        product->Name = name;
+                        product->Price = price;
                     }
                 }
 
