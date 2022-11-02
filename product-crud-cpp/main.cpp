@@ -1,22 +1,23 @@
+#include "Entities/Product.h"
 #include <iostream>
 #include <list>  
-#include "Entities/Product.h"
+#include <string>
 
 using namespace std;
 
 list<Product> products;
 
-Product GetById(int id)
+Product getById(const int id)
 {
     for(Product product : products)
     {
-        if (product.Id == id)
+        if (product.id == id)
         {
             return product;
         }
     }
 
-    return Product();
+    return {};
 }
 
 int main()
@@ -24,7 +25,7 @@ int main()
     int option = 0;
 
     cout << "\nWelcome! What do you want to do?" << endl;
-    string options("");
+    string options;
     options.append("\n1 - Create");
     options.append("\n2 - Read");
     options.append("\n3 - Update");
@@ -40,14 +41,14 @@ int main()
         {
             case 1:
             {
-                string name = "";
+                string name;
                 double price = 0.0;
                 cout << "\nProduct name: ";
                 cin >> name;
                 cout << "Product price: ";
                 cin >> price;
 
-                products.push_back(Product(name, price));
+                products.emplace_back(name, price);
 
                 cout << "created!" << endl;
 
@@ -55,16 +56,16 @@ int main()
             }
             case 2:
             {
-                if (products.size() == 0)
+                if (products.empty())
                 {
                     cout << "\nno data\n" << endl;
                     break;
                 }
 
                 string list("\nProducts:");
-                for(Product product : products)
+                for(const Product& product : products)
                 {
-                    list.append("\nid: " + to_string(product.Id) + " | name: " + product.Name + " | price: " + to_string(product.Price));
+                    list.append(product.toString());
                 }
 
                 cout << list << endl;
@@ -79,17 +80,17 @@ int main()
                 cout << "Product Id: ";
                 cin >> id;
 
-                Product productToUpdate = GetById(id);
+                Product productToUpdate = getById(id);
 
-                if (productToUpdate.Id != id)
+                if (productToUpdate.id != id)
                 {
                     cout << "not found" << endl;
                     break;
                 }
 
-                cout << "\nid: " + to_string(productToUpdate.Id) + " | name: " + productToUpdate.Name + " | price: " + to_string(productToUpdate.Price) + "\n" << endl;
+                cout << productToUpdate.toString() << endl;
 
-                string name = "";
+                string name;
                 double price = 0.0;
 
                 cout << "\nNew product name: ";
@@ -97,12 +98,12 @@ int main()
                 cout << "New product price: ";
                 cin >> price;
 
-                for (auto product = products.rbegin( ); product != products.rend( ); product++)
+                for (auto product = products.rbegin( ); product != products.rend( ); ++product)
                 {
-                    if (product->Id == productToUpdate.Id)
+                    if (product->id == productToUpdate.id)
                     {
-                        product->Name = name;
-                        product->Price = price;
+                        product->name = name;
+                        product->price = price;
                     }
                 }
 
@@ -118,15 +119,15 @@ int main()
                 cout << "Product Id: ";
                 cin >> id;
 
-                Product productToDelete = GetById(id);
+                Product productToDelete = getById(id);
 
-                if (productToDelete.Id != id)
+                if (productToDelete.id != id)
                 {
                     cout << "not found" << endl;
                     break;
                 }
 
-                cout << "\nid: " + to_string(productToDelete.Id) + " | name: " + productToDelete.Name + " | price: " + to_string(productToDelete.Price) + "\n" << endl;
+                cout << productToDelete.toString() << endl;
 
                 string response;
 
