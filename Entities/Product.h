@@ -1,4 +1,4 @@
-#ifndef PRODUCT_H
+﻿#ifndef PRODUCT_H
 #define PRODUCT_H
 #include <random>
 
@@ -9,11 +9,11 @@ class Product
 private:
     static int RandomNumber()
     {
-	    random_device rd; // obtain a random number from hardware
+        random_device rd; // obtain a random number from hardware
         mt19937 gen(rd()); // seed the generator
         uniform_int_distribution<> distr(1, 100); // define the range
 
-	    return distr(gen);
+        return distr(gen);
     }
 
 public:

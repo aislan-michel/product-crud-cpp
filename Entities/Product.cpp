@@ -1,4 +1,4 @@
-#include "Product.h"
+﻿#include "Product.h"
 
 #include <string>
 
@@ -18,7 +18,7 @@ Product::Product(const string _name, const double _price)
 
 string Product::toString( ) const
 {
-	return "\nid: " + to_string(id) + " | name: " + name + " | price: " + to_string(price);
+    return "\nid: " + to_string(id) + " | name: " + name + " | price: " + to_string(price);
 }
 
 
